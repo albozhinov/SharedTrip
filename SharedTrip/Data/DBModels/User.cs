@@ -1,5 +1,6 @@
 ﻿namespace SharedTrip.Data.DBModels
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -26,6 +27,7 @@
 
         public User()
         {
+            Id = Guid.NewGuid().ToString();
             UserTrips = new List<UserTrip>();
         }
     }
