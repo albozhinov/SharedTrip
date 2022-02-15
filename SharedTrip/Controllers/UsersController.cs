@@ -76,7 +76,12 @@
             return Redirect("/");
         }
 
-        public Response Logout()
-            => View();
+        [Authorize]
+        public Response Logout() 
+        {
+            SignOut();
+
+            return Redirect("/");
+        }
     }
 }
