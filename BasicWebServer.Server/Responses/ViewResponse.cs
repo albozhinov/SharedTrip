@@ -108,7 +108,7 @@ namespace BasicWebServer.Server.Responses
                 .Select(p => new
                 {
                     p.Name,
-                    Value = p.GetValue(model)
+                    Value = p.GetValue(model) ?? string.Empty
                 });
 
             foreach (var item in data)
