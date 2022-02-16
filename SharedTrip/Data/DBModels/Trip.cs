@@ -37,6 +37,7 @@
         public Trip()
         {
             UserTrips = new List<UserTrip>();
+            Id = Guid.NewGuid().ToString();
         }
     }
 }

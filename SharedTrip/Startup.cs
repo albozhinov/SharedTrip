@@ -19,6 +19,7 @@
             server.ServiceCollection
                 .Add<IUserService, UserService>()
                 .Add<IRepository, Repository>()
+                .Add<ITripService, TripService>()
                 .Add<ApplicationDbContext>();
 
 

@@ -24,6 +24,13 @@
         [HttpPost]
         public Response Login(LoginViewModel model)
         {
+            var isAuthorized = User.IsAuthenticated;
+
+            if (isAuthorized)
+            {
+                return Redirect("/Trips/All");
+            }
+
             Request.Session.Clear();
 
             (string userId, bool isCorrect) = userService.IsLoginCorrect(model);
@@ -44,14 +51,40 @@
 
         [HttpGet]
         public Response Login()
-            => View();
+        {
+            var isAuthorized = User.IsAuthenticated;
 
+            if (isAuthorized)
+            {
+                return Redirect("/Trips/All");
+            }
+
+            return View();
+        }
+
+        [HttpGet]
         public Response Register()
-            => View();
+        {
+            var isAuthorized = User.IsAuthenticated;
+
+            if (isAuthorized)
+            {
+                return Redirect("/Trips/All");
+            }
+
+            return View();
+        }
 
         [HttpPost]
         public Response Register(RegisterViewModel model)
         {
+            var isAuthorized = User.IsAuthenticated;
+
+            if (isAuthorized)
+            {
+                return Redirect("/Trips/All");
+            }
+
             var (isValid, errors) = userService.ValidateModel(model);
 
             if (!isValid)
@@ -73,12 +106,18 @@
                 return View(new List<ErrorViewModel>() { new ErrorViewModel("Unexpected Error") }, "/Error");
             }
 
-            return Redirect("/");
+            return Redirect("/Users/Login");
         }
-
-        [Authorize]
+                
         public Response Logout() 
         {
+            var isAuthorized = User.IsAuthenticated;
+
+            if (!isAuthorized)
+            {
+                return View(new List<ErrorViewModel>() { new ErrorViewModel("You are not logged in, please login or register.") }, "/Error");
+            }
+
             SignOut();
 
             return Redirect("/");
