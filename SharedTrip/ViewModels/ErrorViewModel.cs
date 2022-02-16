@@ -2,11 +2,11 @@
 {
     public  class ErrorViewModel
     {
-        public string ErrorMassage { get; set; }
+        public string ErrorMessage { get; set; }
 
-        public ErrorViewModel(string massage)
+        public ErrorViewModel(string message)
         {
-            ErrorMassage = massage;
+            ErrorMessage = message;
         }
     }
 }
